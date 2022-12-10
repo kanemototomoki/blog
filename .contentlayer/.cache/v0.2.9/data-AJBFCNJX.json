@@ -1,0 +1,29 @@
+{
+  "cacheItemsMap": {
+    "sample.mdx": {
+      "document": {
+        "title": "foobae",
+        "description": "foobae",
+        "createdAt": "2022-12-10",
+        "updatedAt": "2022-12-10",
+        "body": {
+          "raw": "\n# Modified BSD License\n\n_Copyright © `<year>`, `<copyright holder>`_\n_All rights reserved._\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n3. Neither the name of the `<organization>` nor the\n   names of its contributors may be used to endorse or promote products\n   derived from this software without specific prior written permission.\n\n```ts\nconst num: number = 1;\nconst s = async () => {\n  console.log('aa');\n};\n```\n",
+          "html": "<h1>Modified BSD License</h1>\n<p><em>Copyright © <code>&#x3C;year></code>, <code>&#x3C;copyright holder></code></em>\n<em>All rights reserved.</em></p>\n<p>Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:</p>\n<ol>\n<li>Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.</li>\n<li>Redistributions in binary form must reproduce the above copyright\nnotice, this list of conditions and the following disclaimer in the\ndocumentation and/or other materials provided with the distribution.</li>\n<li>Neither the name of the <code>&#x3C;organization></code> nor the\nnames of its contributors may be used to endorse or promote products\nderived from this software without specific prior written permission.</li>\n</ol>\n<pre><code class=\"language-ts\">const num: number = 1;\nconst s = async () => {\n  console.log('aa');\n};\n</code></pre>"
+        },
+        "_id": "sample.mdx",
+        "_raw": {
+          "sourceFilePath": "sample.mdx",
+          "sourceFileName": "sample.mdx",
+          "sourceFileDir": ".",
+          "contentType": "mdx",
+          "flattenedPath": "sample"
+        },
+        "type": "Blog",
+        "url": "/blog/sample"
+      },
+      "documentHash": "1670670243140",
+      "hasWarnings": false,
+      "documentTypeName": "Blog"
+    }
+  }
+}
