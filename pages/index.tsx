@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { HeaderSearch as MyHeader } from '@components/ui/Header';
+import { useLiveReload } from 'next-contentlayer/hooks';
 
 const Home: NextPage = () => {
+  useLiveReload();
   return (
     <div>
       <Head>

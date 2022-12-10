@@ -1,0 +1,79 @@
+---
+title: getUserMedia
+description: getUserMedia
+createdAt: 2022-12-10
+updatedAt: 2022-12-10
+---
+
+# GetUserMedia
+
+## 概要
+
+- web カメラ関連の実装の際に使う API
+- [MDN](https://developer.mozilla.org/ja/docs/Web/API/MediaDevices/getUserMedia)
+
+## コード
+
+### とりあえず MediaStream が欲しいってとき
+
+```ts
+const constaints: MediaStreamConstraints = {
+  audio: true,
+  video: true,
+}
+
+navigator.mediaDevices.getUserMedia(constraints)
+```
+
+### video のサイズや FPS を指定するとき
+
+```ts
+const constaints: MediaStreamConstraints = {
+  audio: true,
+  video: {
+    width: {
+      min: 640,
+      ideal: 1920,
+      max: 1920,
+    },
+    height: {
+      min: 360,
+      ideal: 1080,
+      max: 1080,
+    },
+    frameRate: {
+      min: 15,
+      ideal: 30,
+      max: 30,
+    },
+    // スマホの場合はカメラが表裏にあるので設定する
+    // https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints/facingMode
+    // facingMode: "user"
+    advanced: [],
+  },
+}
+
+navigator.mediaDevices.getUserMedia(constraints)
+```
+
+### mediaSream を取得する
+基本的にはvideo要素とかに流すのでsrcObjectにmediaStreamを設定してあげる
+
+```ts
+const GetUserMedia = () => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    try {
+      ;(async () => {
+        const mediaStream = await navigator.mediaDevices.getUserMedia(constaints)
+        videoRef.current.srcObject = mediaStream
+      })()
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
+
+  return <video ref={videoRef}>;
+}
+```

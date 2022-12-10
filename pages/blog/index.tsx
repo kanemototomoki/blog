@@ -20,10 +20,11 @@ function BlogCard(blog: Blog) {
 }
 
 export default function Home({ blog }: { blog: Blog[] }) {
+  console.warn({ blog });
   return (
     <div>
       <Head>
-        <title>Contentlayer Blog Example</title>
+        <title>knmt.dev - 記事一覧</title>
       </Head>
 
       <h1>Contentlayer Blog Example</h1>
