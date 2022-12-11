@@ -18,13 +18,13 @@ export const Blog = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: 'string',
-      resolve: (doc) => `/blog/${doc._raw.flattenedPath}`,
+      resolve: (doc) => `${doc._raw.flattenedPath}`,
     },
   },
 }));
 
 export default makeSource({
-  contentDirPath: 'blog',
+  contentDirPath: './pages/blog',
   documentTypes: [Blog],
   mdx: {
     remarkPlugins: [
