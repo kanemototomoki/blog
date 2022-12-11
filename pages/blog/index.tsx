@@ -1,37 +1,40 @@
 import { allBlogs } from 'contentlayer/generated';
 import type { Blog } from 'contentlayer/generated';
 import Head from 'next/head';
-import Link from 'next/link';
+import { BlogOverView } from '@components/BlogOverView';
+import { BlogListContainer } from '@components/BlogListContainer';
+import { Grid } from '@mantine/core';
 
 export async function getStaticProps() {
   const blog = allBlogs;
   return { props: { blog } };
 }
 
-function BlogCard(blog: Blog) {
+export default function Page({ blog }: { blog: Blog[] }) {
+  console.log({ blog})
   return (
-    <div>
-      <time dateTime={blog.createdAt}>{blog.createdAt}</time>
-      <h2>
-        <Link href={blog.url}>{blog.title}</Link>
-      </h2>
-    </div>
-  );
-}
-
-export default function Home({ blog }: { blog: Blog[] }) {
-  console.warn({ blog });
-  return (
-    <div>
+    <>
       <Head>
-        <title>knmt.dev - 記事一覧</title>
+        <title>blog - knmt.dev</title>
       </Head>
 
-      <h1>Contentlayer Blog Example</h1>
+      <BlogListContainer>
+        <h1>Blog</h1>
 
-      {blog.map((blog, idx) => (
-        <BlogCard key={idx} {...blog} />
-      ))}
-    </div>
+        <Grid>
+          {blog.map((blog) => (
+            <Grid.Col key={blog.title}>
+              <BlogOverView
+                tags={blog.tags}
+                title={blog.title}
+                url={blog.url}
+                createdAt={blog.createdAt}
+                updatedAt={blog.updatedAt}
+              />
+            </Grid.Col>
+          ))}
+        </Grid>
+      </BlogListContainer>
+    </>
   );
 }

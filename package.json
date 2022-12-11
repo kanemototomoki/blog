@@ -7,7 +7,7 @@
     "dev:contentlayer": "contentlayer dev",
     "dev:nextjs": "next dev",
     "start": "next start",
-    "build": "npm run build:*",
+    "build": "run-p build:*",
     "build:contentlayer": "contentlayer build",
     "build:nextjs": "npm run type-check && next build && next export -o dist",
     "lint": "next lint --dir src",

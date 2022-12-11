@@ -15,6 +15,7 @@ export type Blog = {
   type: 'Blog'
   title: string
   description: string
+  tags: string[]
   createdAt: string
   updatedAt: string
   /** MDX file body */

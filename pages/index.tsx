@@ -1,10 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { HeaderSearch as MyHeader } from '@components/ui/Header';
-import { useLiveReload } from 'next-contentlayer/hooks';
 
-const Home: NextPage = () => {
-  useLiveReload();
+const Page: NextPage = () => {
   return (
     <div>
       <Head>
@@ -12,19 +9,10 @@ const Home: NextPage = () => {
         <meta name='description' content='blog by knmt' />
       </Head>
 
-      <MyHeader
-        links={[
-          {
-            link: 'blog',
-            label: 'blog',
-          },
-        ]}
-      />
-      <main>
+
         <h1>hello</h1>
-      </main>
     </div>
   );
 };
 
-export default Home;
+export default Page;

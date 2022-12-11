@@ -1,11 +1,11 @@
 ---
 title: getUserMedia
 description: getUserMedia
+tags:
+  - JavaScript
 createdAt: 2022-12-10
 updatedAt: 2022-12-10
 ---
-
-# GetUserMedia
 
 ## 概要
 
@@ -20,9 +20,9 @@ updatedAt: 2022-12-10
 const constaints: MediaStreamConstraints = {
   audio: true,
   video: true,
-}
+};
 
-navigator.mediaDevices.getUserMedia(constraints)
+navigator.mediaDevices.getUserMedia(constraints);
 ```
 
 ### video のサイズや FPS を指定するとき
@@ -51,13 +51,14 @@ const constaints: MediaStreamConstraints = {
     // facingMode: "user"
     advanced: [],
   },
-}
+};
 
-navigator.mediaDevices.getUserMedia(constraints)
+navigator.mediaDevices.getUserMedia(constraints);
 ```
 
 ### mediaSream を取得する
-基本的にはvideo要素とかに流すのでsrcObjectにmediaStreamを設定してあげる
+
+基本的には video 要素とかに流すので srcObject に mediaStream を設定してあげる
 
 ```ts
 const GetUserMedia = () => {

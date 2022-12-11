@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { allBlogs, Blog } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
+import { BackButton } from '@components/BackButton';
 
 export async function getStaticPaths() {
   const paths = allBlogs.map((blog) => blog.url);
@@ -29,7 +30,7 @@ const BlogLayout = ({ blog }: { blog: Blog }) => {
       </Head>
       <article>
         <div>
-          <Link href='/'>Home</Link>
+          <BackButton />
         </div>
         <div>
           <h1>{blog.title}</h1>

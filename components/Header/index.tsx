@@ -1,11 +1,4 @@
-import {
-  createStyles,
-  Header,
-  Autocomplete,
-  Group,
-  Burger,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { createStyles, Header, Autocomplete, Group } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import Link from 'next/link';
 
@@ -18,7 +11,7 @@ const useStyles = createStyles((theme) => ({
   inner: {
     height: 56,
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
 
@@ -61,7 +54,6 @@ interface HeaderSearchProps {
 }
 
 export function HeaderSearch({ links }: HeaderSearchProps) {
-  const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
   const items = links.map((link) => (
@@ -71,14 +63,10 @@ export function HeaderSearch({ links }: HeaderSearchProps) {
   ));
 
   return (
-    <Header height={56} className={classes.header} mb={120}>
+    <Header height={56} className={classes.header} mb={0}>
       <div className={classes.inner}>
         <Group>
-          <Burger opened={opened} onClick={toggle} size='sm' />
-        </Group>
-
-        <Group>
-          <Group ml={50} spacing={5} className={classes.links}>
+          <Group ml={20} spacing={5} className={classes.links}>
             {items}
           </Group>
           <Autocomplete
