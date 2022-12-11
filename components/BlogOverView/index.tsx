@@ -2,7 +2,6 @@ import {
   createStyles,
   Card,
   Text,
-  Group,
   Container,
   Grid,
 } from '@mantine/core';

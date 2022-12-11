@@ -1,13 +1,15 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { allBlogs, Blog } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { BackButton } from '@components/BackButton';
+import { getBlog } from '@utils/getBlog';
 
+// @ts-ignore
 export async function getStaticPaths() {
-  const paths = allBlogs.map((blog) => blog.url);
+  const paths = getBlog().blog.map((blog) => blog.url);
+
   return {
-    paths,
+    paths: [...paths],
     fallback: false,
   };
 }

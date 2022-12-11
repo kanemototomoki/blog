@@ -1,5 +1,5 @@
 ---
-title: tokio
+title: tokioについてざっくりメモ
 description: tokio
 tags:
   - Rust
@@ -14,20 +14,19 @@ tokio で GET リクエストを行う
 
 ## コード
 
-```sh
+クレートの追加
+```sh shell
 cargo add reqwest
 cargo add tokio
 ```
 
-```toml
-// cargo.toml
-
+```toml cargo.toml
 [dependencies]
 reqwest = "0.11.13"
 tokio = { version = "1.23", features = ["full"] }
 ```
 
-```rs
+```rs main.rs
 use reqwest;
 
 #[tokio::main]
