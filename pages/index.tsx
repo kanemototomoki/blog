@@ -10,7 +10,7 @@ const Page: NextPage = () => {
       </Head>
 
 
-        <h1>hello</h1>
+        <h1>工事中</h1>
     </div>
   );
 };

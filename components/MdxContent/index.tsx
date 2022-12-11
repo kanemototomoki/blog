@@ -8,7 +8,7 @@ export const MdxContent = ({ blog }: { blog: Blog }) => {
   return (
     <>
       <Head>
-        <title>{blog.title}</title>
+        <title>{blog.title} - knmt.dev</title>
       </Head>
       <article>
         <div>
@@ -22,5 +22,3 @@ export const MdxContent = ({ blog }: { blog: Blog }) => {
     </>
   );
 };
-
-// export default BlogLayout;

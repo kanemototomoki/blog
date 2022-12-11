@@ -4,7 +4,7 @@ import { BlogOverView } from '@components/BlogOverView';
 import { BlogListContainer } from '@components/BlogListContainer';
 import { Grid } from '@mantine/core';
 import { Pagination } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { usePagination } from '@mantine/hooks';
 import { getBlog } from '@utils/getBlog';
 import { useRouter } from 'next/router';
@@ -22,8 +22,6 @@ export async function getStaticPaths() {
       page: blog.url,
     },
   }));
-
-  console.warn('paths: ', [...pagePaths, ...blogPaths]);
 
   return {
     paths: [...pagePaths, ...blogPaths],
@@ -46,14 +44,14 @@ export async function getStaticProps(context: any) {
   }
 
   const { blog, totalPageCount } = getBlog({
-    currentPageNum: Number(context.params.page),
+    currentPageNum: num,
   });
 
   return {
     props: {
       blog,
       totalPageCount,
-      currentPageCount: Number(context.params.page),
+      currentPageCount: num,
     },
   };
 }
@@ -67,12 +65,10 @@ export default function Page({
   totalPageCount: number;
   currentPageCount?: number;
 }) {
-  console.log({ totalPageCount, currentPageCount });
   const router = useRouter();
   const [page, onChange] = useState(currentPageCount || 1);
   const pagination = usePagination({ total: totalPageCount, page, onChange });
 
-  console.log({ pagination });
   return (
     <>
       <Head>

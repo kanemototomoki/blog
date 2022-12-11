@@ -46,7 +46,7 @@ export default function App(props: AppProps) {
           <MyHeader
             links={[
               {
-                link: 'blog',
+                link: '/blog',
                 label: 'blog',
               },
             ]}

@@ -1,6 +1,6 @@
 import { allBlogs, Blog } from 'contentlayer/generated';
 
-export const PER_PAGE = 1;
+export const PER_PAGE = 10;
 export type Props = {
   currentPageNum?: number;
   perPage?: number;
