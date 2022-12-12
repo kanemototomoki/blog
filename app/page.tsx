@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 
-const Page: NextPage = () => {
+export default function Page() {
   return (
     <div>
       <Head>
@@ -9,10 +8,7 @@ const Page: NextPage = () => {
         <meta name='description' content='blog by knmt' />
       </Head>
 
-
-        <h1>工事中</h1>
+      <h1>工事中</h1>
     </div>
   );
-};
-
-export default Page;
+}
