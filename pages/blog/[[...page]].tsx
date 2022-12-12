@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GetStaticPathsResult } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { usePagination } from '@mantine/hooks';
@@ -9,34 +10,46 @@ import { BlogListContainer } from '@components/BlogListContainer';
 import { MdxContent } from '@components/MdxContent';
 import { getBlog } from '@utils/getBlog';
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const { blog, totalPageCount } = getBlog();
   const pagePaths = new Array(totalPageCount).fill(0).map((_, i) => ({
     params: {
-      page: String(i + 1),
+      page: [String(i + 1)],
     },
   }));
   const blogPaths = blog.map((blog) => ({
     params: {
-      page: blog.url,
+      page: [blog.url],
     },
   }));
 
   return {
-    paths: [...pagePaths, ...blogPaths],
+    paths: [
+      {
+        params: {
+          page: [''],
+        },
+      },
+      ...pagePaths,
+      ...blogPaths,
+    ],
     fallback: false,
   };
 }
 
-export async function getStaticProps(context: any) {
-  const num = Number(context.params.page);
+export async function getStaticProps({
+  params,
+}: {
+  params: { page: string[] };
+}) {
+  const num = Number((params.page && params.page[0]) || 1);
   const isNaN = Number.isNaN(num);
 
   if (isNaN) {
     const { blog, totalPageCount } = getBlog();
     return {
       props: {
-        blog: blog.find((blog) => blog.url === context.params.page),
+        blog: blog.find((blog) => blog.url === params.page[0]),
         totalPageCount,
       },
     };
@@ -67,7 +80,6 @@ export default function Page({
   const router = useRouter();
   const [page, onChange] = useState(currentPageCount || 1);
   const pagination = usePagination({ total: totalPageCount, page, onChange });
-
 
   return (
     <>

@@ -17,7 +17,7 @@ export default function App(props: AppProps) {
 
   useEffect(() => {
     switch (route) {
-      case '/blog/[page]':
+      case '/blog/[[...page]]':
         setActiveTab('blog');
         break;
       case '/':
