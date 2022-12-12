@@ -1,10 +1,4 @@
-import {
-  createStyles,
-  Card,
-  Text,
-  Container,
-  Grid,
-} from '@mantine/core';
+import { createStyles, Card, Text, Container, Grid } from '@mantine/core';
 import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
@@ -42,7 +36,7 @@ export function BlogOverView({
 
   const tagsText = tags.map((tag) => `#${tag}`).join(' ');
   return (
-    <Container fluid sx={(theme) => ({})}>
+    <Container fluid sx={(theme) => ({})} px={0}>
       <Card withBorder radius='md' p={0} className={classes.card}>
         <Grid className={classes.body} align='center'>
           <Grid.Col span={12}>

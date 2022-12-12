@@ -1,90 +1,81 @@
-import { createStyles, Header, Autocomplete, Group } from '@mantine/core';
-import { IconSearch } from '@tabler/icons';
+import { createStyles, Header, Group, Grid, Text, Flex } from '@mantine/core';
 import Link from 'next/link';
+import { FC } from 'react';
 
 const useStyles = createStyles((theme) => ({
   header: {
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
   },
-
   inner: {
     height: 56,
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
-
-  links: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-  },
-
-  search: {
-    [theme.fn.smallerThan('xs')]: {
-      display: 'none',
-    },
-  },
-
-  link: {
-    display: 'block',
-    lineHeight: 1,
-    padding: '8px 12px',
-    borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
-
+  item: {
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colors.dark[3],
     },
   },
 }));
 
-interface HeaderSearchProps {
-  links: { link: string; label: string }[];
-}
-
-export function HeaderSearch({ links }: HeaderSearchProps) {
+export type Props = {
+  activeTab: 'about' | 'blog';
+};
+export const AppHeader: FC<Props> = (props) => {
   const { classes } = useStyles();
+  const { activeTab } = props;
 
-  const items = links.map((link) => (
-    <Link key={link.label} href={link.link}>
-      {link.label}
-    </Link>
-  ));
+  const items = [
+    {
+      tab: 'about',
+      label: 'about',
+      path: '/',
+    },
+    {
+      tab: 'blog',
+      label: 'blog',
+      path: '/blog',
+    },
+  ].map((v, i) => {
+    return (
+      <Group
+        key={v.tab}
+        w={'fit-content'}
+        ml={i > 0 ? 15 : 0}
+        className={classes.item}
+        sx={(theme) => {
+          if (activeTab !== v.tab) {
+            return {};
+          }
+
+          return {
+            backgroundColor:
+              theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.white,
+          };
+        }}
+      >
+        <Link href={v.path}>
+          <Text size='xl' fw={700} p={8}>
+            {v.label}
+          </Text>
+        </Link>
+      </Group>
+    );
+  });
 
   return (
     <Header height={56} className={classes.header} mb={0}>
       <div className={classes.inner}>
         <Group>
-          <Group ml={20} spacing={5} className={classes.links}>
-            {items}
+          <Group ml={20} spacing={5}>
+            <Flex align='flex-start' direction='row'>
+              {items}
+            </Flex>
           </Group>
-          <Autocomplete
-            className={classes.search}
-            placeholder='Search'
-            icon={<IconSearch size={16} stroke={1.5} />}
-            data={[
-              'React',
-              'Angular',
-              'Vue',
-              'Next.js',
-              'Riot.js',
-              'Svelte',
-              'Blitz.js',
-            ]}
-          />
         </Group>
       </div>
     </Header>
   );
-}
+};

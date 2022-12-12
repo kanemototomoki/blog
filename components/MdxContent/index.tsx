@@ -8,7 +8,7 @@ export const MdxContent = ({ blog }: { blog: Blog }) => {
   return (
     <>
       <Head>
-        <title>{blog.title} - knmt.dev</title>
+        <title>{`${blog.title} - knmt.dev`}</title>
       </Head>
       <article>
         <div>

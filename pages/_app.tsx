@@ -1,12 +1,30 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
 import '@code-hike/mdx/dist/index.css';
 import 'style/globals.css';
-import { HeaderSearch as MyHeader } from '@components/Header';
+
+import { useEffect, useState } from 'react';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { Grid } from '@mantine/core';
+import { AppHeader } from '@components/Header';
+import { SideContent } from '@components/SideContent';
+import { StyleProvider } from '@components/StyleProvider';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+  const { route } = useRouter();
+  const [activeTab, setActiveTab] = useState<'about' | 'blog'>('about');
+
+  useEffect(() => {
+    switch (route) {
+      case '/blog/[page]':
+        setActiveTab('blog');
+        break;
+      case '/':
+      default:
+        setActiveTab('about');
+    }
+  }, [activeTab, route]);
 
   return (
     <>
@@ -18,50 +36,30 @@ export default function App(props: AppProps) {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'dark',
-          colors: {
-            dark: [
-              '#d5d7e0',
-              '#acaebf',
-              '#8c8fa3',
-              '#666980',
-              '#4d4f66',
-              '#34354a',
-              '#2b2c3d',
-              '#1d1e30',
-              '#0c0d21',
-              '#01010a',
-            ],
-          },
-          fontFamily:
-            'Noto Sans JP, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+      <div
+        style={{
+          maxWidth: '80vw',
+          margin: 'auto',
         }}
       >
-        <>
-          <MyHeader
-            links={[
-              {
-                link: '/blog',
-                label: 'blog',
-              },
-            ]}
-          />
+        <StyleProvider>
+          <AppHeader activeTab={activeTab} />
           <main
             style={{
-              maxWidth: '70vw',
-              margin: 'auto',
-              padding: '30px'
+              padding: '30px',
             }}
           >
-            <Component {...pageProps} />
+            <Grid>
+              <Grid.Col span={3}>
+                <SideContent />
+              </Grid.Col>
+              <Grid.Col span={9}>
+                <Component {...pageProps} />
+              </Grid.Col>
+            </Grid>
           </main>
-        </>
-      </MantineProvider>
+        </StyleProvider>
+      </div>
     </>
   );
 }

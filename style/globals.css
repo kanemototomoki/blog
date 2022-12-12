@@ -7,6 +7,14 @@
   display: block;
 } */
 
+html {
+  scrollbar-gutter: stable;
+}
+
+a {
+  text-decoration: none;
+}
+
 [class^='ch-code'] {
   font-family: SFMono-Regular, Consolas;
   text-decoration: none;

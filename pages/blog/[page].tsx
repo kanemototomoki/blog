@@ -1,14 +1,13 @@
-import type { Blog } from 'contentlayer/generated';
+import { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { usePagination } from '@mantine/hooks';
+import { Pagination, Grid } from '@mantine/core';
+import type { Blog } from 'contentlayer/generated';
 import { BlogOverView } from '@components/BlogOverView';
 import { BlogListContainer } from '@components/BlogListContainer';
-import { Grid } from '@mantine/core';
-import { Pagination } from '@mantine/core';
-import { useState } from 'react';
-import { usePagination } from '@mantine/hooks';
-import { getBlog } from '@utils/getBlog';
-import { useRouter } from 'next/router';
 import { MdxContent } from '@components/MdxContent';
+import { getBlog } from '@utils/getBlog';
 
 export async function getStaticPaths() {
   const { blog, totalPageCount } = getBlog();
@@ -69,16 +68,16 @@ export default function Page({
   const [page, onChange] = useState(currentPageCount || 1);
   const pagination = usePagination({ total: totalPageCount, page, onChange });
 
+
   return (
     <>
-      <Head>
-        <title>blog - knmt.dev</title>
-      </Head>
-
       {!Array.isArray(blog) ? (
         <MdxContent blog={blog} />
       ) : (
         <>
+          <Head>
+            <title>blog - knmt.dev</title>
+          </Head>
           <BlogListContainer>
             <h1>Blog</h1>
 
