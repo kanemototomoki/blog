@@ -7,8 +7,9 @@ import {
 } from 'next';
 import Head from 'next/head';
 import { usePagination } from '@mantine/hooks';
-import { Grid } from '@mantine/core';
+import { Grid, Title } from '@mantine/core';
 import type { Blog } from 'contentlayer/generated';
+import { LayoutBlog } from '@components/LayoutBlog';
 import { BlogOverView } from '@components/BlogOverView';
 import { BlogListContainer } from '@components/BlogListContainer';
 import { Pager } from '@components/Pager';
@@ -90,33 +91,35 @@ export default function Page({
   const pagination = usePagination({ total: totalPageCount, page, onChange });
 
   return (
-    <>
-      <Head>
-        <title>blog - knmt.dev</title>
-      </Head>
-      <BlogListContainer>
-        <h1>Blog</h1>
+    <LayoutBlog>
+      <>
+        <Head>
+          <title>blog - knmt.dev</title>
+        </Head>
+        <BlogListContainer>
+          <Title order={1}>Blog</Title>
 
-        <Grid>
-          {blog.map((blog) => (
-            <Grid.Col key={blog.title}>
-              <BlogOverView
-                tags={blog.tags}
-                title={blog.title}
-                url={blog.url}
-                createdAt={blog.createdAt}
-                updatedAt={blog.updatedAt}
-              />
-            </Grid.Col>
-          ))}
-        </Grid>
-      </BlogListContainer>
-      <Pager
-        totalPageCount={totalPageCount}
-        currentPageCount={page}
-        pagination={pagination}
-        path={`/blog/tags/${tag}/`}
-      />
-    </>
+          <Grid mt={10}>
+            {blog.map((blog) => (
+              <Grid.Col key={blog.title}>
+                <BlogOverView
+                  tags={blog.tags}
+                  title={blog.title}
+                  url={blog.url}
+                  createdAt={blog.createdAt}
+                  updatedAt={blog.updatedAt}
+                />
+              </Grid.Col>
+            ))}
+          </Grid>
+        </BlogListContainer>
+        <Pager
+          totalPageCount={totalPageCount}
+          currentPageCount={page}
+          pagination={pagination}
+          path={`/blog/tags/${tag}/`}
+        />
+      </>
+    </LayoutBlog>
   );
 }

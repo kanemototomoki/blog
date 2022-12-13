@@ -1,17 +1,36 @@
-import type { NextPage } from 'next';
+import type { ReactElement } from 'react';
 import Head from 'next/head';
+import type { NextPageWithLayout } from './_app';
+import { LayoutAbout } from '@components/LayoutAbout';
+import { Title, Text, Group } from '@mantine/core';
+import Link from 'next/link';
 
-const Page: NextPage = () => {
+const Page: NextPageWithLayout = () => {
   return (
-    <div>
-      <Head>
-        <title>knmt-blog</title>
-        <meta name='description' content='blog by knmt' />
-      </Head>
+    <>
+      <Title order={1}>誰のブログ？</Title>
+      <Group mt={10}>
+        <Text>
+          <Link href={'https://twitter.com/knmt_fe'}>👉 @knmt_fe</Link>
+        </Text>
+      </Group>
+    </>
+  );
+};
 
-
-        <h1>工事中</h1>
-    </div>
+Page.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <>
+      <LayoutAbout>
+        <>
+          <Head>
+            <title>about - knmt.dev</title>
+            <meta name='description' content='blog by knmt' />
+          </Head>
+          {page}
+        </>
+      </LayoutAbout>
+    </>
   );
 };
 

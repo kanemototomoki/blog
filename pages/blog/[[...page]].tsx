@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { GetStaticPathsResult, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import {
+  GetStaticPathsResult,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from 'next';
 import Head from 'next/head';
 import { usePagination } from '@mantine/hooks';
-import { Grid } from '@mantine/core';
+import { Grid, Title } from '@mantine/core';
+import { LayoutBlog } from '@components/LayoutBlog';
 import { BlogOverView } from '@components/BlogOverView';
 import { BlogListContainer } from '@components/BlogListContainer';
 import { MdxContent } from '@components/MdxContent';
@@ -86,39 +91,41 @@ export default function Page({
 
   return (
     <>
-      {blog && !Array.isArray(blog) ? (
-        <MdxContent blog={blog} />
-      ) : (
-        <>
-          <Head>
-            <title>blog - knmt.dev</title>
-          </Head>
-          <BlogListContainer>
-            <h1>Blog</h1>
+      <LayoutBlog>
+        {blog && !Array.isArray(blog) ? (
+          <MdxContent blog={blog} />
+        ) : (
+          <>
+            <Head>
+              <title>blog - knmt.dev</title>
+            </Head>
+            <BlogListContainer>
+              <Title order={1}>Blog</Title>
 
-            <Grid>
-              {blog &&
-                blog.map((blog) => (
-                  <Grid.Col key={blog.title}>
-                    <BlogOverView
-                      tags={blog.tags}
-                      title={blog.title}
-                      url={blog.url}
-                      createdAt={blog.createdAt}
-                      updatedAt={blog.updatedAt}
-                    />
-                  </Grid.Col>
-                ))}
-            </Grid>
-          </BlogListContainer>
-          <Pager
-            totalPageCount={totalPageCount}
-            currentPageCount={page}
-            pagination={pagination}
-            path={'/blog/'}
-          />
-        </>
-      )}
+              <Grid mt={10}>
+                {blog &&
+                  blog.map((blog) => (
+                    <Grid.Col key={blog.title}>
+                      <BlogOverView
+                        tags={blog.tags}
+                        title={blog.title}
+                        url={blog.url}
+                        createdAt={blog.createdAt}
+                        updatedAt={blog.updatedAt}
+                      />
+                    </Grid.Col>
+                  ))}
+              </Grid>
+            </BlogListContainer>
+            <Pager
+              totalPageCount={totalPageCount}
+              currentPageCount={page}
+              pagination={pagination}
+              path={'/blog/'}
+            />
+          </>
+        )}
+      </LayoutBlog>
     </>
   );
 }
