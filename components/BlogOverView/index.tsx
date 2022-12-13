@@ -8,7 +8,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    fontWeight: 700,
     lineHeight: 1.2,
   },
 
@@ -40,7 +39,13 @@ export function BlogOverView({
       <Card withBorder radius='md' p={0} className={classes.card}>
         <Grid className={classes.body} align='center'>
           <Grid.Col span={12}>
-            <Text className={classes.title} mt='xs' mb='xs'>
+            <Text
+              className={classes.title}
+              mt='xs'
+              mb='xs'
+              weight={700}
+              size='lg'
+            >
               <Link href={`/blog/${url}`}>{title}</Link>
             </Text>
           </Grid.Col>

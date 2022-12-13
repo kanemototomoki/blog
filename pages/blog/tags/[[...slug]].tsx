@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { GetStaticPathsResult } from 'next';
+import {
+  GetStaticPathsResult,
+  GetStaticPropsResult,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from 'next';
 import Head from 'next/head';
 import { usePagination } from '@mantine/hooks';
 import { Grid } from '@mantine/core';
@@ -43,13 +48,25 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 
 export async function getStaticProps({
   params,
-}: {
-  params: { slug: string[] };
-}) {
-  const num = Number(params.slug[1] || 1);
+}: GetStaticPropsContext): Promise<
+  GetStaticPropsResult<{
+    blog: Blog[];
+    tag: string;
+    totalPageCount: number;
+    currentPageCount: number;
+  }>
+> {
+  if (!(params && params.slug != undefined)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const slug = params.slug;
+  const num = Number(slug[1] || 1);
 
   const { blog, totalPageCount } = getBlogByTag({
-    tag: params.slug[0],
+    tag: slug[0],
     currentPageCount: num,
   });
 
@@ -68,12 +85,7 @@ export default function Page({
   tag,
   totalPageCount,
   currentPageCount,
-}: {
-  blog: Blog[];
-  tag: string;
-  totalPageCount: number;
-  currentPageCount?: number;
-}) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [page, onChange] = useState(currentPageCount || 1);
   const pagination = usePagination({ total: totalPageCount, page, onChange });
 
