@@ -2,13 +2,12 @@ import { allBlogs, Blog } from 'contentlayer/generated';
 
 export const PER_PAGE = 1;
 export type Props = {
-  currentPageNum?: number;
-  perPage?: number;
+  currentPageCount?: number;
 };
 /**
  * @desc 日付順(desc)でソートされた全blogを返却する
  */
-export const getBlog = ({ currentPageNum, perPage = PER_PAGE }: Props = {}): {
+export const getAllBlog = ({ currentPageCount }: Props = {}): {
   blog: Blog[];
   totalPageCount: number;
 } => {
@@ -16,9 +15,9 @@ export const getBlog = ({ currentPageNum, perPage = PER_PAGE }: Props = {}): {
     return new Date(a.createdAt) > new Date(b.createdAt) ? -1 : 1;
   });
 
-  const totalPageCount = Math.ceil(blog.length / perPage);
+  const totalPageCount = Math.ceil(blog.length / PER_PAGE);
 
-  if (!currentPageNum) {
+  if (!currentPageCount) {
     return {
       blog,
       totalPageCount,
@@ -27,8 +26,40 @@ export const getBlog = ({ currentPageNum, perPage = PER_PAGE }: Props = {}): {
 
   return {
     blog: blog.slice(
-      Math.max(0, currentPageNum - 1),
-      perPage * Math.max(0, currentPageNum - 1) + perPage
+      Math.max(0, currentPageCount - 1),
+      PER_PAGE * Math.max(0, currentPageCount - 1) + PER_PAGE
+    ),
+    totalPageCount,
+  };
+};
+
+/**
+ * @desc 日付順(desc)でソート & 指定されたタグの全blogを返却する
+ */
+export const getBlogByTag = ({
+  tag,
+  currentPageCount,
+}: Props & {
+  tag: string;
+}): {
+  blog: Blog[];
+  totalPageCount: number;
+} => {
+  const { blog } = getAllBlog();
+  const matchedBlog = blog.filter((v) => v.tags.includes(tag));
+  const totalPageCount = Math.ceil(matchedBlog.length / PER_PAGE);
+
+  if (!currentPageCount) {
+    return {
+      blog,
+      totalPageCount,
+    };
+  }
+
+  return {
+    blog: matchedBlog.slice(
+      Math.max(0, currentPageCount - 1),
+      PER_PAGE * Math.max(0, currentPageCount - 1) + PER_PAGE
     ),
     totalPageCount,
   };
@@ -37,8 +68,16 @@ export const getBlog = ({ currentPageNum, perPage = PER_PAGE }: Props = {}): {
 /**
  * @desc descでソートされたタグ一覧を返す
  */
-export const getAllTags = (): string[] => {
-  const tags = getBlog().blog.map((blog) => blog.tags).flat();
+export const getAllTags = (): {
+  tags: string[];
+  all: {
+    tag: string;
+    totalPageCount: number;
+  }[];
+} => {
+  const tags = getAllBlog()
+    .blog.map((blog) => blog.tags)
+    .flat();
   const map = new Map<string, number>();
 
   for (let i = 0; i < tags.length; i++) {
@@ -54,7 +93,13 @@ export const getAllTags = (): string[] => {
     .sort((a, b) => {
       return a[1] > b[1] ? -1 : 1;
     })
-    .map((v) => v[0]);
+    .map((v) => ({
+      tag: v[0],
+      totalPageCount: Math.ceil(v[1] / PER_PAGE),
+    }));
 
-  return [...new Set(result)];
+  return {
+    tags: [...new Set(result.map((v) => v.tag))],
+    all: result,
+  };
 };

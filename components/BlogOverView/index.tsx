@@ -41,7 +41,7 @@ export function BlogOverView({
         <Grid className={classes.body} align='center'>
           <Grid.Col span={12}>
             <Text className={classes.title} mt='xs' mb='xs'>
-              <Link href={url}>{title}</Link>
+              <Link href={`/blog/${url}`}>{title}</Link>
             </Text>
           </Grid.Col>
           <Grid.Col span='auto'>

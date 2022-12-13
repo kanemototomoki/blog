@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { GetStaticPathsResult } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { usePagination } from '@mantine/hooks';
-import { Pagination, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import type { Blog } from 'contentlayer/generated';
 import { BlogOverView } from '@components/BlogOverView';
 import { BlogListContainer } from '@components/BlogListContainer';
 import { MdxContent } from '@components/MdxContent';
-import { getBlog } from '@utils/getBlog';
+import { Pager } from '@components/Pager';
+import { getAllBlog } from '@utils/getBlog';
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const { blog, totalPageCount } = getBlog();
+  const { blog, totalPageCount } = getAllBlog();
   const pagePaths = new Array(totalPageCount).fill(0).map((_, i) => ({
     params: {
       page: [String(i + 1)],
@@ -46,7 +46,7 @@ export async function getStaticProps({
   const isNaN = Number.isNaN(num);
 
   if (isNaN) {
-    const { blog, totalPageCount } = getBlog();
+    const { blog, totalPageCount } = getAllBlog();
     return {
       props: {
         blog: blog.find((blog) => blog.url === params.page[0]),
@@ -55,8 +55,8 @@ export async function getStaticProps({
     };
   }
 
-  const { blog, totalPageCount } = getBlog({
-    currentPageNum: num,
+  const { blog, totalPageCount } = getAllBlog({
+    currentPageCount: num,
   });
 
   return {
@@ -77,7 +77,6 @@ export default function Page({
   totalPageCount: number;
   currentPageCount?: number;
 }) {
-  const router = useRouter();
   const [page, onChange] = useState(currentPageCount || 1);
   const pagination = usePagination({ total: totalPageCount, page, onChange });
 
@@ -107,20 +106,11 @@ export default function Page({
               ))}
             </Grid>
           </BlogListContainer>
-          <Pagination
-            sx={{
-              justifyContent: 'center',
-              marginTop: '20px',
-            }}
-            total={totalPageCount}
-            page={currentPageCount}
-            onChange={(num) => {
-              pagination.setPage(num);
-              router.push({
-                pathname: '/blog/[page]',
-                query: { page: num },
-              });
-            }}
+          <Pager
+            totalPageCount={totalPageCount}
+            currentPageCount={page}
+            pagination={pagination}
+            path={'/blog/'}
           />
         </>
       )}

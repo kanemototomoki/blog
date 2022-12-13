@@ -16,8 +16,9 @@ export default function App(props: AppProps) {
   const [activeTab, setActiveTab] = useState<'about' | 'blog'>('about');
 
   useEffect(() => {
-    switch (route) {
-      case '/blog/[[...page]]':
+    const path = route.split('/')[1];
+    switch (path) {
+      case 'blog':
         setActiveTab('blog');
         break;
       case '/':

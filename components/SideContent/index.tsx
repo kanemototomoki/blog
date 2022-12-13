@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
 
 const _SideContent: FC<Props> = (props) => {
   const { classes } = useStyles();
-  const tags = getAllTags();
+  const { tags } = getAllTags();
 
   const tagLinks = tags.map((tag) => {
     return (
@@ -46,7 +46,7 @@ const _SideContent: FC<Props> = (props) => {
           }}
           className={classes.tag}
         >
-          <Link href={tag}>
+          <Link href={`/blog/tags/${tag}`}>
             <Text size='md' fw={500} p={4}>
               {tag}
             </Text>
