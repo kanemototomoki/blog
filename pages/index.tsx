@@ -17,6 +17,14 @@ const Page: NextPageWithLayout = () => {
             </Text>
           </Grid.Col>
           <Grid.Col>
+            <Text>
+              リポジトリは
+              <Link href={'https://github.com/kanemototomoki/blog'}>
+                こちら
+              </Link>
+            </Text>
+          </Grid.Col>
+          <Grid.Col>
             <Text>最近はRustにハマってる</Text>
           </Grid.Col>
         </Grid>

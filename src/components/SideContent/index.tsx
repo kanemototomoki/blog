@@ -34,7 +34,6 @@ const _SideContent: FC<Props> = (props) => {
 
   useEffect(() => {
     if (ref.current != null) {
-      console.log(ref.current, ref.current.getBoundingClientRect().top);
       setTop(ref.current.getBoundingClientRect().top - 56);
     }
   }, []);
