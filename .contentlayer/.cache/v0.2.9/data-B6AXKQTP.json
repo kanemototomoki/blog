@@ -1,0 +1,39 @@
+{
+  "cacheItemsMap": {
+    "test1.mdx": {
+      "document": {
+        "title": "test1",
+        "description": "test1",
+        "tags": [
+          "Rust",
+          "非同期処理",
+          "awa",
+          "ポエム",
+          "aws",
+          "docker",
+          "技術書"
+        ],
+        "createdAt": "2023-01-01",
+        "updatedAt": "2022-12-10",
+        "body": {
+          "raw": "\nawa\n",
+          "code": "var Component=(()=>{var p=Object.create;var a=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var w=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var j=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),_=(t,e)=>{for(var n in e)a(t,n,{get:e[n],enumerable:!0})},c=(t,e,n,r)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of x(e))!f.call(t,o)&&o!==n&&a(t,o,{get:()=>e[o],enumerable:!(r=m(e,o))||r.enumerable});return t};var l=(t,e,n)=>(n=t!=null?p(w(t)):{},c(e||!t||!t.__esModule?a(n,\"default\",{value:t,enumerable:!0}):n,t)),D=t=>c(a({},\"__esModule\",{value:!0}),t);var d=j((C,i)=>{i.exports=_jsx_runtime});var h={};_(h,{default:()=>b,frontmatter:()=>g});var s=l(d()),g={title:\"test1\",description:\"test1\",tags:[\"Rust\",\"\\u975E\\u540C\\u671F\\u51E6\\u7406\",\"awa\",\"\\u30DD\\u30A8\\u30E0\",\"aws\",\"docker\",\"\\u6280\\u8853\\u66F8\"],createdAt:new Date(16725312e5),updatedAt:new Date(16706304e5)};function u(t){let e=Object.assign({p:\"p\"},t.components);return(0,s.jsx)(e.p,{children:\"awa\"})}function M(t={}){let{wrapper:e}=t.components||{};return e?(0,s.jsx)(e,Object.assign({},t,{children:(0,s.jsx)(u,t)})):u(t)}var b=M;return D(h);})();\n;return Component;"
+        },
+        "_id": "test1.mdx",
+        "_raw": {
+          "sourceFilePath": "test1.mdx",
+          "sourceFileName": "test1.mdx",
+          "sourceFileDir": ".",
+          "contentType": "mdx",
+          "flattenedPath": "test1"
+        },
+        "type": "Blog",
+        "url": "test1",
+        "headings": []
+      },
+      "documentHash": "1670855943848",
+      "hasWarnings": false,
+      "documentTypeName": "Blog"
+    }
+  }
+}

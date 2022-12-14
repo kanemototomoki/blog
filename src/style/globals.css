@@ -1,0 +1,27 @@
+/* toggle display code block copy-button */
+/* [class^='ch-code'] [class$="button"] {
+  display: none;
+}
+
+[class^='ch-code']:hover [class$="button"] {
+  display: block;
+} */
+
+html {
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+[class^='ch-code'] {
+  font-family: SFMono-Regular, Consolas;
+  text-decoration: none;
+  margin: 0;
+}
+
+[class^='ch-code'] + [class^='ch-code'] {
+  margin-top: 15px;
+}

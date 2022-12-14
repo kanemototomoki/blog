@@ -7,12 +7,12 @@ import {
 import Head from 'next/head';
 import { usePagination } from '@mantine/hooks';
 import { Grid, Title } from '@mantine/core';
-import { LayoutBlog } from '@components/LayoutBlog';
-import { BlogOverView } from '@components/BlogOverView';
-import { BlogListContainer } from '@components/BlogListContainer';
-import { MdxContent } from '@components/MdxContent';
-import { Pager } from '@components/Pager';
-import { getAllBlog } from '@utils/getBlog';
+import { LayoutBlog } from '@src/components/LayoutBlog';
+import { BlogOverView } from '@src/components/BlogOverView';
+import { BlogListContainer } from '@src/components/BlogListContainer';
+import { MdxContent } from '@src/components/MdxContent';
+import { Pager } from '@src/components/Pager';
+import { getAllBlog } from '@src/utils/getBlog';
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const { blog, totalPageCount } = getAllBlog();

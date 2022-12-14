@@ -1,6 +1,9 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import { remarkCodeHike } from '@code-hike/mdx';
 import { createRequire } from 'module';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import GithubSlugger from 'github-slugger';
 const require = createRequire(import.meta.url);
 const theme = require('shiki/themes/monokai.json');
 
@@ -20,6 +23,28 @@ export const Blog = defineDocumentType(() => ({
       type: 'string',
       resolve: (doc) => `${doc._raw.flattenedPath}`,
     },
+    headings: {
+      type: 'json',
+      resolve: async (doc) => {
+        // コードブロック中の#は拾いたくないので消す
+        const regXCodeBlock = /`{3}[\s\S]+?`{3}/g;
+        const str = doc.body.raw.replace(regXCodeBlock, '');
+        const slugger = new GithubSlugger();
+        const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+        const headings = Array.from(str.matchAll(regXHeader)).map(
+          ({ groups }) => {
+            const flag = groups?.flag;
+            const content = groups?.content;
+            return {
+              level: flag?.length,
+              text: content,
+              slug: content ? slugger.slug(content) : null,
+            };
+          }
+        );
+        return headings;
+      },
+    },
   },
 }));
 
@@ -29,7 +54,11 @@ export default makeSource({
   mdx: {
     remarkPlugins: [
       [remarkCodeHike, { theme, showCopyButton: true, lineNumbers: true }],
+      remarkGfm,
     ],
-    rehypePlugins: [],
+    rehypePlugins: [
+      // h1~h6にidを付与する
+      rehypeSlug,
+    ],
   },
 });

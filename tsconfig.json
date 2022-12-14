@@ -17,8 +17,9 @@
     "baseUrl": ".",
     "paths": {
       "contentlayer/generated": ["./.contentlayer/generated"],
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"]
+      "@src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/hooks/utils/*"]
     }
   },
   "include": [

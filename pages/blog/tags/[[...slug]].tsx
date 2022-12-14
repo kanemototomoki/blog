@@ -9,11 +9,11 @@ import Head from 'next/head';
 import { usePagination } from '@mantine/hooks';
 import { Grid, Title } from '@mantine/core';
 import type { Blog } from 'contentlayer/generated';
-import { LayoutBlog } from '@components/LayoutBlog';
-import { BlogOverView } from '@components/BlogOverView';
-import { BlogListContainer } from '@components/BlogListContainer';
-import { Pager } from '@components/Pager';
-import { getAllTags, getBlogByTag } from '@utils/getBlog';
+import { LayoutBlog } from '@src/components/LayoutBlog';
+import { BlogOverView } from '@src/components/BlogOverView';
+import { BlogListContainer } from '@src/components/BlogListContainer';
+import { Pager } from '@src/components/Pager';
+import { getAllTags, getBlogByTag } from '@src/utils/getBlog';
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const { all } = getAllTags();
