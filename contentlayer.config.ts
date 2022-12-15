@@ -9,7 +9,7 @@ const theme = require('shiki/themes/monokai.json');
 
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
-  filePathPattern: '**/*.mdx',
+  filePathPattern: '*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },

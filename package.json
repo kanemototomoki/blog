@@ -13,7 +13,8 @@
     "lint": "next lint --dir src",
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "gen-mdx": "./blog/draft/bin/gen-mdx"
   },
   "dependencies": {
     "@code-hike/mdx": "^0.7.4",
