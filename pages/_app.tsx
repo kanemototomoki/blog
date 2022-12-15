@@ -5,6 +5,7 @@ import { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/react';
 import { LayoutBaseCenter } from '@src/components/LayoutBaseCenter';
 import { StyleProvider } from '@src/components/StyleProvider';
 
@@ -35,6 +36,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             }}
           >
             <Component {...pageProps} />
+            <Analytics />
           </main>
         </LayoutBaseCenter>
       </StyleProvider>
