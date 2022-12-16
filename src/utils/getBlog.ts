@@ -58,8 +58,8 @@ export const getBlogByTag = ({
 
   return {
     blog: matchedBlog.slice(
-      Math.max(0, currentPageCount - 1),
-      PER_PAGE * Math.max(0, currentPageCount - 1) + PER_PAGE
+      Math.max(0, currentPageCount * PER_PAGE) - PER_PAGE,
+      Math.max(0, currentPageCount - 1) * PER_PAGE + PER_PAGE
     ),
     totalPageCount,
   };
