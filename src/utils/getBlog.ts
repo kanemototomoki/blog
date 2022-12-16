@@ -26,7 +26,7 @@ export const getAllBlog = ({ currentPageCount }: Props = {}): {
 
   return {
     blog: blog.slice(
-      Math.max(0, currentPageCount - 1),
+      Math.max(0, currentPageCount * PER_PAGE) - PER_PAGE,
       Math.max(0, currentPageCount - 1) * PER_PAGE + PER_PAGE
     ),
     totalPageCount,

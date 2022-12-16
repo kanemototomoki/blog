@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import { Blog } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import { BackButton } from '@src/components/BackButton';
+// import { BackButton } from '@src/components/BackButton';
 
 export const MdxContent = ({ blog }: { blog: Blog }) => {
+
   const MDXContent = useMDXComponent(blog.body.code);
   return (
     <>
@@ -11,9 +12,9 @@ export const MdxContent = ({ blog }: { blog: Blog }) => {
         <title>{`${blog.title} - knmt.dev`}</title>
       </Head>
       <article>
-        <div>
+        {/* <div>
           <BackButton />
-        </div>
+        </div> */}
         <div>
           <h1>{blog.title}</h1>
         </div>
