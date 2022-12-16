@@ -1,0 +1,32 @@
+---
+title: Rust env関連のメモ
+description: rust-env
+tags:
+  - Rust
+createdAt: 2022-12-15
+updatedAt: 2022-12-15
+---
+
+## current_exe(), current_dir()
+https://doc.rust-lang.org/std/env/index.html
+
+`std::env`のメソッド。
+それぞれ現在実行中のファイルのパスと、作業中のディレクトリを返す。
+
+```sh shell
+cargo new path-test
+cd path-test
+```
+
+```rs path-test/src/main.rs
+use std::env;
+use std::path::PathBuf;
+
+fn main() {
+    let current_exe: PathBuf = env::current_exe().expect("ERROR");
+    let current_dir: PathBuf = env::current_dir().expect("ERROR");
+
+    println!("current_exe: {:?}", current_exe); // /**/path-test/target/debug/path-test
+    println!("current_dir: {:?}", current_dir); // /**/path-test
+}
+```

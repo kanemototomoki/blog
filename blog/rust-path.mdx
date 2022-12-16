@@ -1,0 +1,46 @@
+---
+title: Rust ファイルが存在するか確認する
+description: Rust ファイル確認方法とか
+tags:
+  - Rust
+createdAt: 2022-12-16
+updatedAt: 2022-12-16
+---
+
+## 概要
+
+ファイルが存在するか確認し、すでに存在すればエラー、存在しなければ作成をしたい
+
+## コード
+パスの取得方法はいろいろあるのでなんでもよさそう。
+
+```rs main.rs
+use std::fs::File;
+use std::path::{Path, PathBuf};
+
+fn main() -> Result<String, String> {
+  let target_file_name = "target.txt".to_string();
+  let target_dir = Path::new("/foo/bar/");
+  let path_to_target_file: PathBuf = target_dir.join(PathBuf::from(target_file_name));
+
+  if path_to_target_file.is_file() {
+    // すでに存在する
+    return 0
+  }
+
+  // ファイルの作成
+  File::create(path_to_new_file).expect("ファイルの作成に失敗しました。");
+}
+```
+
+ファイルを作成して書き込む場合はこうなる
+
+```rs main.rs
+fn main.rs {
+  let new_file = File::create(path_to_new_file)
+    .expect("作成に失敗しました。");
+  new_file
+    .write_all("foobar".as_bytes())
+    .expect("書き込みに失敗しました。");
+}
+```

@@ -3,5 +3,7 @@
 import getUserMediaMdx from './get-user-media.mdx.json' assert { type: 'json' }
 import test1Mdx from './test1.mdx.json' assert { type: 'json' }
 import tokioMdx from './tokio.mdx.json' assert { type: 'json' }
+import rustEnvMdx from './rust-env.mdx.json' assert { type: 'json' }
+import rustPathMdx from './rust-path.mdx.json' assert { type: 'json' }
 
-export const allBlogs = [getUserMediaMdx, test1Mdx, tokioMdx]
+export const allBlogs = [getUserMediaMdx, test1Mdx, tokioMdx, rustEnvMdx, rustPathMdx]
