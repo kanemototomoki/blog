@@ -1,0 +1,20 @@
+---
+title: Rust Vecのメソッドとか
+description: Rust Vec
+tags:
+  -
+createdAt: 2022-12-18
+updatedAt: 2022-12-18
+---
+
+## dedup(重複排除)
+
+```rs main.rs
+fn main() {
+  let mut vec = vec![1, 2, 3, 3, 1];
+  vec.debup();
+
+  // ※ 完全にユニークにするにはソートする必要がある
+  assert_eq!(vec, [1, 2, 3, 1]);
+}
+```
