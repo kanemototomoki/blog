@@ -1,0 +1,25 @@
+---
+title: CoreWebVitalsについて
+description: CoreWebVitalsについてのメモ
+tags:
+  - フロントエンド
+  - パフォーマンス
+createdAt: 2022-12-18
+updatedAt: 2022-12-18
+---
+
+## CoreWebVitalsとは
+Googleが設定しているサイトの健全性を示す指標
+
+- LCP(Largest Contentful Paint)
+  - ページロードのパフォーマンス指標
+  - **一番大きなコンテンツが表示されるまで**の時間
+  - 2.5s以内がよい
+- FID(First Input Delay)
+  - 双方向性を計測する指標
+  - ユーザーが最初に操作してから、処理を始めるまでの時間
+  - 0.1s以内がよい
+- CLS(Cumulative Layout Shift)
+  - 視覚的な安定性を計測する指標
+  - いわゆるコンテンツ読み込みでページがガクガクするやつ
+  - 0.1以内がよい
