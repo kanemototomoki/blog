@@ -1,0 +1,38 @@
+---
+title: Rust よく使うツールについて
+description: Rust よく使うツールについて
+tags:
+  - Rust
+createdAt: 2022-12-19
+updatedAt: 2022-12-19
+---
+
+## 概要
+Rustで毎回プロジェクトに加えるツールとかをまとめる
+
+## rustfix
+Warningを自動で修正してくれる。
+cargoに内包されている。
+
+```sh shell
+cargo fix
+```
+
+## clippy
+Warningとかアンチパターンの箇所を教えてくれる。
+
+```sh shell
+rustup component add clippy
+
+cargo clippy
+```
+
+## rustfmt
+フォーマッター。
+rust-analizerがフォーマットしてくれるからコマンドを叩く機会は少ないかも？
+
+```sh shell
+rustup component add rustfmt
+
+cargo fmt
+```

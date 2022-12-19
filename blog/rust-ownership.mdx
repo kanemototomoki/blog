@@ -1,0 +1,51 @@
+---
+title: Rust 所有権について
+description: Rust 所有権
+tags:
+  - Rust
+createdAt: 2022-12-19
+updatedAt: 2022-12-19
+---
+
+## 所有権とは？
+- Rustの目玉機能
+- 変数の所有権(所有者)はひとつのみ
+- copyとmoveがある
+
+## copyとmove
+その型がCopyトレイトを実装していたら変数束縛時に値がコピーされる。
+
+```rs main.rs
+fn main() {
+   let a: u8 = 0;
+   let b = a; // 値をコピー
+   println!("a: {}", a);
+}
+```
+
+Copyトレイトを実装していなければ所有権が移動する。
+```rs main.rs
+fn main() {
+   let a: String = "".to_string();
+   let b = a; // 所有権がaからbに移動する
+   println!("a: {}", a); // 所有権が移動した変数なのでエラー
+}
+```
+
+## 借用
+値の参照を渡すこと。
+変数名の前に & を付ける。
+ちなみに * を付けることで参照外しとなる。
+
+```rs main.rs
+fn main() {
+    let s: String = "abcde".to_string();
+    // sの参照を関数に渡す
+    let len: u64 = get_len(&s);
+    println!("len: {}", len);
+}
+
+fn get_len(s: &str) -> u64 {
+    s.len() as u64
+}
+```
