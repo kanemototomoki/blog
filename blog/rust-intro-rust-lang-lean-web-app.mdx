@@ -1,0 +1,29 @@
+---
+title: 「Webアプリ開発で学ぶ Rust言語入門」を読んだ感想とか
+description: Webアプリ開発で学ぶ Rust言語入門の感想
+tags:
+  - Rust
+  - 技術書
+createdAt: 2022-12-20
+updatedAt: 2022-12-20
+---
+
+## 概要
+こちらの本を読んだ
+https://www.shuwasystem.co.jp/book/9784798067315.html
+
+## 1章
+ここは環境構築とかなので特になし
+
+## 2章
+anyhowとthiserrorは知らなかったので勉強になった。
+serdeに関しては本のコードだけでは動かなかったが、公式に対処法が書いてあったので特に困らずいけた。
+
+```toml Cargo.toml
+[dependencies]
+serde = { version = "1.0.151", features = ["derive"] }
+serde_json = "1.0"
+```
+
+## 3章
+wip
