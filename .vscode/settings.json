@@ -1,0 +1,4 @@
+{
+  "mdx-preview.preview.previewOnChange": true,
+  "mdx-preview.build.useSucraseTranspiler": true
+}
